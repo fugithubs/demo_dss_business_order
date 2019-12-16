@@ -1,0 +1,12 @@
+spring:
+  profiles:
+    active: dev
+# swagger2 基本信息配置
+swagger2:
+  name: SpringBoot 测试
+  version: 1.0
+  email: fuxiaorong@kqgeo.com
+  title: SpringBoot+logback+MyBatisCodeHelper
+  description: SpringBoot+logback+MyBatisCodeHelper 测试
+  scanpath: com.dss.order.controller
+  url: http://localhost:8889

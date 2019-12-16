@@ -1,0 +1,84 @@
+spring:
+  security:
+    user:
+      name: user
+      password: user
+  datasource:
+    # 单数据源配置
+    url: jdbc:mysql://192.168.101.98:3306/mytest?characterEncoding=UTF-8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #验证连接的有效性
+    test-while-idle: true
+    #获取连接时候验证，会影响性能
+    test-on-borrow: false
+    #在连接归还到连接池时是否测试该连接
+    test-on-return: false
+    validation-query: SELECT 1
+    #空闲连接回收的时间间隔，与test-while-idle一起使用，设置5分钟
+    time-between-eviction-runs-millis: 300000
+    #连接池空闲连接的有效时间 ，设置30分钟
+    min-evictable-idle-time-millis: 1800000
+    initial-size: 10
+    #指定连接池中最大的活跃连接数.
+    max-active: 100
+    #指定连接池等待连接返回的最大等待时间，毫秒单位.
+    max-wait: 60000
+    #指定必须保持连接的最小值
+    min-idle: 10
+
+  # 服务实例名
+  application:
+    name: demo-service
+  redis:
+    # redis数据库索引（默认为0），我们使用索引为3的数据库，避免和其他数据库冲突
+    database: 3
+    # redis服务器地址（默认为localhost）
+    host: 192.168.101.98
+    # redis端口（默认为6379）
+    port: 6379
+    # redis访问密码（默认为空）
+    password: admin
+    # redis连接超时时间（单位为毫秒）
+    timeout: 1000ms
+    jedis:
+      # redis连接池配置
+      pool:
+        # 最大可用连接数（默认为8，负数表示无限）
+        max-active: -1
+        # 最大空闲连接数（默认为8，负数表示无限）
+        max-idle: -1
+        # 最小空闲连接数（默认为0，该值只有为正数才有作用）
+        min-idle: 0
+# 服务器配置
+server:
+  port: 8809
+# logging 配置
+logging:
+  config: classpath:logback-dev.xml
+  level:
+    com:
+      dss:
+        order:
+          mapper: debug
+# 注册中心配置
+eureka:
+  client:
+    service-url:
+      defaultZone: http://192.168.101.150:8081/eureka/,http://192.168.101.150:8082/eureka/
+  # 服务续约时间
+  instance:
+    #间隔时间默认30s
+    lease-renewal-interval-in-seconds: 5
+    #到期时间默认90s
+    lease-expiration-duration-in-seconds: 10
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${spring.application.instance_id:${server.port}}
+# mybatis 配置
+mybatis:
+  type-aliases-package: com.dss.order.domain
+  mapper-locations: classpath*:mapperxml/*.xml
+# 自定义
+swift:
+  taskThreads: 20
