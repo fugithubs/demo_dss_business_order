@@ -30,4 +30,17 @@ public interface StudentMapper {
     int updateByPrimaryKeySelective(Student record);
 
     int updateByPrimaryKey(Student record);
+
+    /***************以下为自定义方法自动生产xml配置*******************/
+
+    List<Student> findAllByStunameLike(@Param("likeStuname") String likeStuname);
+
+    int insertList(@Param("list") List<Student> list);
+
+    int updateById(@Param("updated")Student updated,@Param("id")Integer id);
+
+    int deleteByStuname(@Param("stuname")String stuname);
+
+
+
 }

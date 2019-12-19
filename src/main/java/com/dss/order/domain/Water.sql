@@ -1,0 +1,11 @@
+-- auto Generated on 2019-12-19
+-- DROP TABLE IF EXISTS water;
+CREATE TABLE water(
+    id INT (11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+    `name` VARCHAR (50) NOT NULL DEFAULT '' COMMENT 'name',
+    belong VARCHAR (50) NOT NULL DEFAULT '' COMMENT 'belong',
+    parent VARCHAR (50) NOT NULL DEFAULT '' COMMENT 'parent',
+    drink TINYINT (3) NOT NULL DEFAULT 0 COMMENT 'drink',
+    INDEX(id),
+    PRIMARY KEY (id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT 'water';
